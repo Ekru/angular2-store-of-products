@@ -1,20 +1,8 @@
 import { Component } from '@angular/core';
-export class Product {
-    id: number;
-    name: string;
-}
-const PRODUCTS: Product[] = [
-    { id: 11, name: 'iPhone'},
-    { id: 12, name: 'iPad' },
-    { id: 13, name: 'Apple Watch' },
-    { id: 14, name: 'Apple TV' },
-    { id: 15, name: 'Dell laptop' },
-    { id: 16, name: 'Toshiba laptop' },
-    { id: 17, name: 'HP laptop' },
-    { id: 18, name: 'Asus laptop' },
-    { id: 19, name: 'Sony laptop' },
-    { id: 20, name: 'LG TV' }
-];
+import { OnInit } from '@angular/core';
+import { Product } from './product';
+import { ProductService } from './product.service';
+
 @Component({
     styles: [`
   .selected {
@@ -75,26 +63,28 @@ const PRODUCTS: Product[] = [
     <span class="badge">{{product.id}}</span> {{product.name}}
   </li>
 </ul>
-<div *ngIf="selectedProduct">
-<h2>{{selectedProduct.name}} details!</h2>
-<div><label>id: </label>{{selectedProduct.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="selectedProduct.name" placeholder="name">
-  </div>
-  </div>
-  `
+<my-product-detail [product]="selectedProduct"></my-product-detail>
+  `,
+    providers: [ProductService],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+    ngOnInit(): void {
+        this.getProducts();
+    }
     title = 'Products available in store';
     product: Product = {
         id: 1,
         name: 'iPhone'
     };
-    products= PRODUCTS;
+
+    products: Product[];
+    constructor(private productService: ProductService) { }
+    getProducts(): void {
+        this.productService.getProducts().then(products => this.products = products);
+    }
+
     selectedProduct: Product;
     onSelect(product: Product): void {
         this.selectedProduct = product;
     }
-
 }
