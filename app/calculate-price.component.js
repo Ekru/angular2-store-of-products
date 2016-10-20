@@ -10,21 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var product_1 = require('./product');
-var ProductDetailComponent = (function () {
-    function ProductDetailComponent() {
+var CalculatePriceComponent = (function () {
+    function CalculatePriceComponent() {
+        this.quantity = 1;
     }
     __decorate([
         core_1.Input(), 
         __metadata('design:type', product_1.Product)
-    ], ProductDetailComponent.prototype, "product", void 0);
-    ProductDetailComponent = __decorate([
+    ], CalculatePriceComponent.prototype, "product", void 0);
+    CalculatePriceComponent = __decorate([
         core_1.Component({
-            selector: 'my-product-detail',
-            template: "\n  <div *ngIf=\"product\">\n    <h2>{{product.name}} details!</h2>\n    <div><label>id: </label>{{product.id}}</div>\n    <div>\n      <label>name: </label>\n      <input [(ngModel)]=\"product.name\" placeholder=\"name\"/>\n    </div>\n    <div>\n      <label>price: </label>\n      <input [(ngModel)]=\"product.price\" placeholder=\"price\"/>\n    </div>\n  </div>\n"
+            selector: 'calculate-price',
+            template: "\n    <div *ngIf=\"product\">\n        <h2>Product Price Calculator</h2>\n        <div>Product price: <input [(ngModel)]=\"product.price\"></div>\n        <div>Quantity: <input [(ngModel)]=\"quantity\"></div>\n        <p>\n          Total price: {{product.price | calculatePrice: quantity}}\n        </p>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
-    ], ProductDetailComponent);
-    return ProductDetailComponent;
+    ], CalculatePriceComponent);
+    return CalculatePriceComponent;
 }());
-exports.ProductDetailComponent = ProductDetailComponent;
-//# sourceMappingURL=product-detail.component.js.map
+exports.CalculatePriceComponent = CalculatePriceComponent;
+//# sourceMappingURL=calculate-price.component.js.map

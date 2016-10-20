@@ -60,10 +60,11 @@ import { ProductService } from './product.service';
 <ul class="products">
   <li *ngFor="let product of products" [class.selected]="product === selectedProduct" (click)="onSelect(product)">
     <!-- each product goes here -->
-    <span class="badge">{{product.id}}</span> {{product.name}}
+    <span class="badge">{{product.id}}</span> {{product.name}} {{product.price|currency}}
   </li>
 </ul>
 <my-product-detail [product]="selectedProduct"></my-product-detail>
+<calculate-price [product]="selectedProduct"></calculate-price>
   `,
     providers: [ProductService],
 })
@@ -74,7 +75,8 @@ export class AppComponent implements OnInit {
     title = 'Products available in store';
     product: Product = {
         id: 1,
-        name: 'iPhone'
+        name: 'iPhone',
+        price: 799.99
     };
 
     products: Product[];

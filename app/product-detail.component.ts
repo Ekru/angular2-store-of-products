@@ -11,6 +11,10 @@ import { Product } from './product';
       <label>name: </label>
       <input [(ngModel)]="product.name" placeholder="name"/>
     </div>
+    <div>
+      <label>price: </label>
+      <input [(ngModel)]="product.price" placeholder="price"/>
+    </div>
   </div>
 `
 
