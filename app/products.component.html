@@ -1,0 +1,15 @@
+<h2>My Products</h2>
+<ul class="products">
+    <li *ngFor="let product of products" [class.selected]="product === selectedProduct" (click)="onSelect(product)">
+        <!-- each product goes here -->
+        <span class="badge">{{product.id}}</span> {{product.name}} {{product.price|currency}}
+    </li>
+</ul>
+<div *ngIf="selectedProduct">
+    <h2>
+        {{selectedProduct.name | uppercase}} is my product
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>
+
+<calculate-price [product]="selectedProduct"></calculate-price>

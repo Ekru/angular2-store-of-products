@@ -8,4 +8,8 @@ export class ProductService {
     getProducts(): Promise<Product[]> {
         return Promise.resolve(PRODUCTS);
     }
+    getProduct(id: number): Promise<Product> {
+        return this.getProducts()
+            .then(Products => Products.find(Product => Product.id === id));
+    }
 }
